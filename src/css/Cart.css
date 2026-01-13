@@ -1,0 +1,13 @@
+.cart-container {
+  margin-top: 100px;
+  margin-right: 590px;
+  margin-left: 500px;
+  margin-bottom: 50px;
+  direction: rtl;
+  padding: 20px;
+  max-width: 600px;
+  margin: "auto";
+  border: 1px solid white;
+  border-radius: 8px;
+  font-family: "Arial";
+}

@@ -1,0 +1,27 @@
+.bar {
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(31, 31, 31);
+    margin: 0;          /* אפס מרג'ין מכל הכיוונים */
+    padding: 0;
+    width: 100%;        /* <--- ממלא כל רוחב הדף */
+    color: aliceblue;
+    position: fixed;
+    top: 0;
+    height: 80px;
+    align-items: center;
+    z-index: 1;
+  }
+  .logo{
+    width: 90px;
+    height: 65px;
+    margin:0px 950px 0px 10px;
+  }
+  .lilink a{
+    margin:0px 10px 0px 10px;
+    color:rgb(240 202 124);
+  }
+  .liuser{
+    margin:0px 30px 0px 10px;
+    color:rgb(255, 255, 255);
+  }

@@ -1,0 +1,26 @@
+.onemeal{
+        display: grid;
+        grid-template-columns: repeat(5, 1fr); /* 5 עמודות באותה רוחב */
+        gap: 20px; /* רווח בין המוצרים */
+        margin: 20px 100px 20px 20px;
+   
+}
+.up{
+margin: 100px 610px 0px 0px;
+color:rgb(240 202 124); 
+}
+.allpagesButton{
+        margin: 0px 650px 30px 0px;
+}
+.pagebutton{
+background-color: rgb(255, 255, 255);
+width: 30px;
+height: 30px;
+border-radius: 8px
+}
+.pagebutton:hover{
+        background-color: rgb(240 202 124);
+}
+.pagebutton:focus{
+        background-color: rgb(240 202 124);
+}

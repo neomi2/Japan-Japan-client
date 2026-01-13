@@ -1,0 +1,22 @@
+.video1 {
+  width: 1520px;
+  height: auto;
+  margin: 80px 0px 0px 0px;
+}
+.allcategoryimg {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 0 auto; /* מרכז */
+  max-width: 1000px; /* שולט ברוחב */
+  margin-bottom: 50px;
+  margin-top: 100px;
+}
+
+.categoryimg {
+  height: 295px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.068), 0 0px 7px;
+  width: 100%; /* חשוב */
+  object-fit: cover; /* שהתמונה לא תימתח */
+}
