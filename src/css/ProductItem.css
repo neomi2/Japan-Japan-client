@@ -1,16 +1,20 @@
+.productpic {
+  width: 210px;
+  height: 270px;
+  border-radius: 15px 15px 0 0;
+  border: 1px solid white;
+  /* display: block; */
+  padding: 0px;
+}
 .allDescription {
   margin-top: 0px;
   margin-bottom: 20px;
   background-color: rgb(31, 31, 31);
-  width: 200px;
+  width: 210px;
   height: 100px;
-  border-radius: 8px;
-
-}
-.productpic {
-  width: 200px;
-  height: 270px;
-  border-radius: 8px;
+  border-radius: 0 0 15px 15px;
+  border: 1px solid white;
+  padding: 0px;
 }
 .name {
   margin: 0px 10px 0px 0px;
@@ -29,14 +33,20 @@
     height: 50px; */
   /* margin-right: 10px; */
   width: 40px;
-  height: 40px;
-  margin-right: 60px;
+  height: 32px;
+  margin-right: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: larger;
+  font-size: 30px;
+  border: 2px solid white;
+  padding: 0px;
+  margin-top: 3px;
 }
 .buttonprice {
   display: flex;
   flex-direction: row;
+}
+.product{
+  padding: 0px 10px 0px 0px;
 }

@@ -3,6 +3,8 @@ import ProductItem from "../components/ProductItem";
 import { getMeals ,getPageCount} from "../api/mealService";
 import "../css/ProductList.css";
 import { Paper, Box, TextField, Button } from "@mui/material";
+// import { useDispatch } from "react-redux";
+// import { deleteMealFromServer } from "../api/mealService";
 
 
   const ProductsList = ({ setCart }) => {
@@ -18,7 +20,7 @@ import { Paper, Box, TextField, Button } from "@mui/material";
       const res = await getMeals(10, currentPage);
       setMeals(res.data);
   }
-  useEffect(() => {
+  useEffect(() => { 
       fetchPageCount();
   }, [])
 
@@ -36,7 +38,14 @@ import { Paper, Box, TextField, Button } from "@mui/material";
         }
         return [...prev, { ...meal, quantity: 1 }];
     });
-  };
+    };
+
+//     const dispatch = useDispatch();
+// const handleDelete = async (id) => {
+//   await deleteMealFromServer(id);
+//   dispatch(deleteMeal(id)); 
+// };
+
   
   return (
         //       <Box
@@ -54,7 +63,7 @@ import { Paper, Box, TextField, Button } from "@mui/material";
       <h1 className="up">המנות שלנו</h1>
       <div className="onemeal">
         {meals.map((meal, index) => (
-          <ProductItem key={index} meal={meal} addToCart={addToCart}/>
+          <ProductItem key={index} meal={meal} addToCart={addToCart} />
         ))}
       </div>
       <div className="allpagesButton">

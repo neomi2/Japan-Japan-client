@@ -19,7 +19,7 @@ export default function Signup() {
       alert("שגיאה בהרשמה");
     }
   };
-
+ 
 
 
   return (

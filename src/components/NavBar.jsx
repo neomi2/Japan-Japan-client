@@ -12,7 +12,7 @@ const NavBar = ({countOfMeals}) => {
   let disp = useDispatch();
   return (
     <nav> 
-      <ul className="bar" style={{ listStyle: "none" }}>
+      <ul className="bar" style={{ listStyle: "none" }}> 
         <li className="liuser">שלום ל-{user ? user : "אורח"}</li>
         <li className="lilink">
           <Link to="Addproduct">

@@ -10,7 +10,7 @@ export default function addproduct() {
     try {
       const response = await addMeal(data);
       console.log("הרשמה מוצר הצליחה:", response.data);
-      alert("הרשמת מוצר הצליחה!"); // הודעה למשתמש
+      alert("הרשמת מוצר הצליחה!");
       reset({ userName:"",userLastName:"",userEmail:"",userPassword:""});
     } catch (error) {
       console.error("אי אפשר ליצור מוצר חדש"+" "+error.response?.data?.message);

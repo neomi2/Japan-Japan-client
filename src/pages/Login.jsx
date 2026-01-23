@@ -15,7 +15,7 @@
 //       <input type="submit" />
 //     </form>
 //   );
-// }
+// } 
 
 import { useForm } from "react-hook-form";
 import { Paper, Box, TextField, Button } from "@mui/material";
@@ -29,12 +29,17 @@ export default function Login() {
 
   const onSubmit = async (data) => {
     try {
-      const response = await signupUser(data);
-      console.log("התחברות הצליחה:", response.data);
+      const res = await loginUser(data);
+      console.log("התחברות הצליחה:", res.data);
+      // שמירת המשתמש המחובר
+      localStorage.setItem("user", JSON.stringify(res.data));
+      // מעבר לדף הבית
+      window.location.href = "/";
     } catch (error) {
-      console.error("שגיאה בהתחברות:", error.response?.data);
+      alert(error.response?.data?.message || "אימייל או סיסמה שגויים");
     }
   };
+  
    // כאן תשלחי לשרת עם axios צריך לעשות רק את השליחה של הנתונים לדטה בייס וגם עיצוב יפה
 
 
@@ -54,16 +59,16 @@ export default function Login() {
         </div>
         {/* מייל */}
         <Box sx={{ mb: 3 ,backgroundColor: "rgba(0, 0, 0, 0.22)",marginTop:5,borderRadius:2,border: "1px solid white"}}>
-          <TextField fullWidth label="מייל" error={!!errors.email} helperText={errors.email && "יש להזין מייל תקין"}
-            {...register("email", {required: true,pattern: /^\S+@\S+$/,})}
+          <TextField fullWidth label="מייל" error={!!errors.userEmail} helperText={errors.userEmail && "יש להזין מייל תקין"}
+            {...register("userEmail", {required: true,pattern: /^\S+@\S+$/,})}
             InputProps={{style: { color: "white" }}}
             InputLabelProps={{style: {  color: "white", right: 30, left: "auto", textAlign: "right" }}}/>
         </Box>
 
         {/* סיסמה */}
         <Box sx={{ mb: 3 ,backgroundColor: "rgba(0, 0, 0, 0.2)",marginTop:5,borderRadius:2,border: "1px solid white"}}>
-          <TextField fullWidth label="סיסמה" type="password" error={!!errors.password} helperText={errors.password && "סיסמה 6–12 תווים"}
-            {...register("password", {required: true,minLength: 6,maxLength: 12,})}
+          <TextField fullWidth label="סיסמה" type="password" error={!!errors.userPassword} helperText={errors.userPassword && "סיסמה 6–12 תווים"}
+            {...register("userPassword", {required: true,minLength: 6,maxLength: 12,})}
             InputProps={{style: { color: "white" }}}
             InputLabelProps={{style: {  color: "white", right: 30, left: "auto", textAlign: "right" }}}/>
         </Box>

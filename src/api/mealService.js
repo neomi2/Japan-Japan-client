@@ -1,6 +1,7 @@
 import axios from "axios";
 
 let baseUrl = `${import.meta.env.VITE_API_URL}/meals`;
+console.log("API Base URL:", baseUrl);
 
 export function getMeals(limit, page) {
     let url = baseUrl;
@@ -21,4 +22,7 @@ export function getPageCount() {
 }
 export const addMeal = async (meal) => {
     return axios.post(baseUrl, meal);
-  } 
+} 
+// export const deleteMealFromServer = (id) => {
+//     return axios.delete(`${baseUrl}/${id}`);
+// }

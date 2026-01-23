@@ -22,7 +22,7 @@ const Cart = ({ cart, setCart }) => {
       return prev.filter(i => i._id !== mealId);
     });
   };
-
+ 
   const handleCheckOut = async () => {
     if (cart.length === 0) return alert("הסל שלך ריק!");
 
@@ -70,7 +70,7 @@ const Cart = ({ cart, setCart }) => {
             <div key={item._id} style={{ display: 'flex', justifyContent: 'space-between', padding: '10px 0', borderBottom: '1px solid #eee', alignItems: 'center' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                 {item.mealImage ? (
-                  <img src={`/images/${item.mealImage}.jpg`} alt={item.mealname} style={{ width: '60px', height: '60px', objectFit: 'cover', borderRadius: '6px' }} />
+                  <img src={`/images/${item.mealImage}.jpg`} alt={item.mealname} style={{ width: '60px', height: '60px', objectFit: 'cover', borderRadius: '6px',border:'1px solid white' }} />
                 ) : (
                   <div style={{ width: '60px', height: '60px', backgroundColor: '#ccc', borderRadius: '6px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>אין תמונה</div>
                 )}
