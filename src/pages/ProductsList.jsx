@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ProductItem from "../components/ProductItem";
 import { getMeals ,getPageCount} from "../api/mealService";
 import "../css/ProductList.css";
-import { Paper, Box, TextField, Button } from "@mui/material";
+import {CircularProgress, Paper, Box, TextField, Button } from "@mui/material";
 // import { useDispatch } from "react-redux";
 // import { deleteMealFromServer } from "../api/mealService";
 
@@ -10,16 +10,24 @@ import { Paper, Box, TextField, Button } from "@mui/material";
   const ProductsList = ({ setCart }) => {
       let [numPages, setNumPages] = useState(0)
       let [meals, setMeals] = useState([]);
-      let [currentPage, setCurrentPage] = useState(1)
+    let [currentPage, setCurrentPage] = useState(1);
+    const [loading, setLoading] = useState(false);
     
       async function fetchPageCount () {
         let res = await getPageCount()
         setNumPages(res.data.totalPages)
     }
-  async function fetchMeals() {
-      const res = await getMeals(10, currentPage);
-      setMeals(res.data);
-  }
+    async function fetchMeals() {
+      setLoading(true);
+      try {
+        const res = await getMeals(10, currentPage);
+        setMeals(res.data);
+      }  catch (error) {
+        console.error("שגיאה בטעינת המנות:", error);
+      }finally {
+        setLoading(false);
+      }
+    }
   useEffect(() => { 
       fetchPageCount();
   }, [])
@@ -62,9 +70,31 @@ import { Paper, Box, TextField, Button } from "@mui/material";
     <div>
       <h1 className="up">המנות שלנו</h1>
       <div className="onemeal">
-        {meals.map((meal, index) => (
+      {loading ? (
+          <Box sx={{display: "flex", justifyContent: "center",
+            alignItems: "center",width: "100%", height: "300px", marginRight: 45}}><>
+            <svg width={0} height={0}>
+              <defs>
+                  <linearGradient id="loaderGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="rgb(255, 255, 255)" />
+                  <stop offset="50%" stopColor="rgb(240, 202, 124)" />
+                  <stop offset="100%" stopColor="rgb(244, 170, 21)" />
+                </linearGradient>
+              </defs>
+            </svg>
+          
+            <CircularProgress
+              size={60}
+              thickness={4}
+              sx={{"svg circle": {stroke: "url(#loaderGradient)",strokeLinecap: "round",
+                },}}/>
+          </> 
+          </Box>
+        ) : (
+        meals.map((meal, index) => (
           <ProductItem key={index} meal={meal} addToCart={addToCart} />
-        ))}
+        ))
+        )}
       </div>
       <div className="allpagesButton">
         {new Array(numPages).fill("*").map((item, index) => {
@@ -74,6 +104,7 @@ import { Paper, Box, TextField, Button } from "@mui/material";
         })}
         </div>
     </div>
+  
     // </Box>
 
   );
