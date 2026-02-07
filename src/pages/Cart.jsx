@@ -92,17 +92,8 @@ const Cart = ({ cart, setCart }) => {
             <h3>סה"כ לתשלום: {totalPrice} ₪</h3>
             <button
               onClick={handleCheckOut}
-              style={{
-                backgroundColor: '#f0ca7c',
-                color: 'white',
-                padding: '15px 20px',
-                width: '100%',
-                border: 'none',
-                cursor: 'pointer',
-                fontSize: '18px',
-                borderRadius: '5px',
-                fontWeight: 'bold',
-                marginTop: '10px'
+              style={{backgroundColor: '#f0ca7c',color: 'white',padding: '15px 20px',width: '100%',border: 'none',cursor: 'pointer',
+                fontSize: '18px',borderRadius: '5px',fontWeight: 'bold',marginTop: '10px'
               }}
             >
               בצע הזמנה

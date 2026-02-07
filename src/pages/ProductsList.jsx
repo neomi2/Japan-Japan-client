@@ -5,15 +5,24 @@ import "../css/ProductList.css";
 import {CircularProgress, Paper, Box, TextField, Button } from "@mui/material";
 // import { useDispatch } from "react-redux";
 // import { deleteMealFromServer } from "../api/mealService";
-
-
-  const ProductsList = ({ setCart }) => {
+import Jumpdescraption from "../components/jumpdescraption";
+ 
+  const ProductsList = ({ setCart, openCart }) => {
       let [numPages, setNumPages] = useState(0)
       let [meals, setMeals] = useState([]);
     let [currentPage, setCurrentPage] = useState(1);
     const [loading, setLoading] = useState(false);
+    const [selectedMeal, setSelectedMeal] = useState(null);
+    const [openModal, setOpenModal] = useState(false);
+
+    const openMealModal = (meal) => {
+      console.log("meal before modal:", meal);
+      setSelectedMeal(meal);
+      setOpenModal(true);
+    };
     
-      async function fetchPageCount () {
+
+      async function fetchPageCount () { 
         let res = await getPageCount()
         setNumPages(res.data.totalPages)
     }
@@ -21,7 +30,7 @@ import {CircularProgress, Paper, Box, TextField, Button } from "@mui/material";
       setLoading(true);
       try {
         const res = await getMeals(10, currentPage);
-        setMeals(res.data);
+        setMeals(res.data); 
       }  catch (error) {
         console.error("שגיאה בטעינת המנות:", error);
       }finally {
@@ -46,6 +55,7 @@ import {CircularProgress, Paper, Box, TextField, Button } from "@mui/material";
         }
         return [...prev, { ...meal, quantity: 1 }];
     });
+    openCart();
     };
 
 //     const dispatch = useDispatch();
@@ -92,7 +102,8 @@ import {CircularProgress, Paper, Box, TextField, Button } from "@mui/material";
           </Box>
         ) : (
         meals.map((meal, index) => (
-          <ProductItem key={index} meal={meal} addToCart={addToCart} />
+          <ProductItem key={meal._id} meal={meal} addToCart={addToCart} onImageClick={openMealModal}/>
+
         ))
         )}
       </div>
@@ -102,7 +113,14 @@ import {CircularProgress, Paper, Box, TextField, Button } from "@mui/material";
             onClick={() => { 
               setCurrentPage(index + 1) }} />
         })}
-        </div>
+      </div>
+      <Jumpdescraption
+        open={openModal}
+        onClose={() => setOpenModal(false)}
+        meal={selectedMeal}
+        addToCart={addToCart}
+      />
+
     </div>
   
     // </Box>

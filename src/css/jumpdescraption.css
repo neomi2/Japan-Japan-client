@@ -1,0 +1,13 @@
+.smallpic{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: transform 0.3s ease; /* אנימציה חלקה */
+    cursor: pointer;
+  }
+  
+  .smallpic:hover {
+    transform: scale(1.3); /* כמה לגדול */
+  }
+  

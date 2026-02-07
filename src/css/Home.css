@@ -15,8 +15,27 @@
 
 .categoryimg {
   height: 295px;
-  border-radius: 8px;
+  border-radius: 8px; 
   box-shadow: 0 4px 8px rgba(255, 255, 255, 0.068), 0 0px 7px;
   width: 100%; /* חשוב */
   object-fit: cover; /* שהתמונה לא תימתח */
 }
+
+
+/* 
+.image-wrapper {
+  position: relative;
+  width: fit-content;
+}
+.text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: transparent;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.image-wrapper:hover .text { 
+  color: rgb(255, 255, 255);
+ } */

@@ -8,6 +8,10 @@ const Home = () => {
         הדפדפן שלך לא תומך בניגון וידאו.
       </video>
       <div className="allcategoryimg">
+        {/* <div className="image-wrapper">
+          <img src="../images/57.jpg" className="categoryimg" />
+          <div className="text">ראשונות</div>
+        </div> */}
         <img src="../images/57.jpg" className="categoryimg" />
         <img src="../images/81.jpg" className="categoryimg" />
         <img src="../images/34.jpg" className="categoryimg" />
@@ -16,7 +20,6 @@ const Home = () => {
         <img src="../images/60.jpg" className="categoryimg" />
         <img src="../images/72.jpg" className="categoryimg" />
         <img src="../images/41.jpg" className="categoryimg" />
-
       </div>
     </div>
   );

@@ -1,0 +1,17 @@
+.addButton, .minusButton {
+    width: 30px;
+    height: 25px;
+    font-size: 20px; /* גודל הכיתוב */
+    font-weight: bold; 
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+  }
+
+  

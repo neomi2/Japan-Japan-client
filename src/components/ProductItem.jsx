@@ -1,17 +1,17 @@
 import "../css/ProductItem.css";
 
-export default function ProductItem({ meal, addToCart }) {
+export default function ProductItem({ meal, addToCart ,onImageClick }) {
   // const user = useSelector(state => state.user.currentUser);
   // const isAdmin = user?.role === "ADMIN";
 
   return (
-    <div>
+    <div> 
       <ul style={{ listStyle: 'none' }} className="product">
         <li>
           {meal.mealImage ? (
             <img src={`/images/${meal.mealImage}.jpg`} alt={meal.mealname} 
-            className="productpic" 
-            />) : (<p>אין תמונה זמינה</p>)}</li>
+            className="productpic" onClick={() => onImageClick(meal)} style={{ cursor: "pointer" }}
+            />) : (<p>אין תמונה זמינה</p>)}</li> 
           <li className="allDescription" key={meal._id} >
           <h3 className="name">{meal.mealname}</h3>
           <p className="Description">{meal.mealDescription}</p>
@@ -21,7 +21,7 @@ export default function ProductItem({ meal, addToCart }) {
         <div className="admin-buttons">
           <button>✏️ </button>
           <button>🗑️ </button>
-        </div>
+        </div> 
       ) : ( */}
         <button onClick={() => addToCart(meal)} className="add-to-cart" >+</button>
       {/* )} */}
