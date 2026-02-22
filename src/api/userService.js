@@ -6,11 +6,14 @@ let baseUrl = `${import.meta.env.VITE_API_URL}/users`;
 export function loginUser(user) {
     return axios.post(baseUrl + "/login", user)  
 }
-export function addUser() {
-    return axios.post(baseUrl + "/signup")
-}
+// export function addUser() {
+//     return axios.post(baseUrl + "/signup", user)
+// }
 export function getAllUsers() {
-    return axios.get(baseUrl)
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    return axios.get(baseUrl, {
+        headers: {Authorization: currentUser?.token}
+    });
 }
 
 export const signUpUser = async (user) => {

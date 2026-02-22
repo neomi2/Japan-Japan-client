@@ -9,20 +9,29 @@ export function getMeals(limit, page) {
         url += "?";
     if (limit)
         url += "limit=" + limit;
-    if (limit && page)
+    if (limit && page) 
         url += "&";
     if (page)
         url += "page=" + page;
     return axios.get(url)
-    // return axios.get(baseUrl + "/");
+    // return axios.get(baseUrl + "/"); 
     
 }
 export function getPageCount() {
     return axios.get(`${baseUrl}/pages`)
-}
+} 
 export const addMeal = async (meal) => {
     return axios.post(baseUrl, meal);
 } 
-// export const deleteMealFromServer = (id) => {
-//     return axios.delete(`${baseUrl}/${id}`);
-// }
+export const deleteMealFromServer = (id) => {
+    return axios.delete(`${baseUrl}/${id}`);
+}
+
+export const updateMeal = (id, updatedData) => {
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    const token = currentUser?.token;
+
+    return axios.put(`${baseUrl}/${id}`, updatedData, {
+        headers: { Authorization: token }
+    });
+};

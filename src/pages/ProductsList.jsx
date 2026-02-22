@@ -4,23 +4,36 @@ import { getMeals ,getPageCount} from "../api/mealService";
 import "../css/ProductList.css";
 import {CircularProgress, Paper, Box, TextField, Button } from "@mui/material";
 // import { useDispatch } from "react-redux";
-// import { deleteMealFromServer } from "../api/mealService";
+import { deleteMealFromServer } from "../api/mealService";
 import Jumpdescraption from "../components/jumpdescraption";
- 
-  const ProductsList = ({ setCart, openCart }) => {
-      let [numPages, setNumPages] = useState(0)
-      let [meals, setMeals] = useState([]);
+import { useLocation } from "react-router-dom";
+import EditModal from "../components/Editproduct";
+import React from "react";
+
+const ProductsList = ({ setCart, openCart }) => {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const selectedCategory = queryParams.get("category");
+
+    let [numPages, setNumPages] = useState(0)
+    let [meals, setMeals] = useState([]);
     let [currentPage, setCurrentPage] = useState(1);
     const [loading, setLoading] = useState(false);
     const [selectedMeal, setSelectedMeal] = useState(null);
     const [openModal, setOpenModal] = useState(false);
-
+    const [selectedMealEdit, setSelectedMealEdit] = useState(null);
+    const [openEdit, setOpenEdit] = React.useState(false);
+  
     const openMealModal = (meal) => {
       console.log("meal before modal:", meal);
       setSelectedMeal(meal);
       setOpenModal(true);
     };
-    
+    const openModalEdit = (meal) => {
+      console.log("meal before edit:", meal);
+      setSelectedMealEdit(meal);
+      setOpenEdit(true);
+    };
 
       async function fetchPageCount () { 
         let res = await getPageCount()
@@ -29,7 +42,9 @@ import Jumpdescraption from "../components/jumpdescraption";
     async function fetchMeals() {
       setLoading(true);
       try {
-        const res = await getMeals(10, currentPage);
+        const limit = selectedCategory ? 1000 : 10;
+        const page = selectedCategory ? 1 : currentPage;
+        const res = await getMeals(limit, page);
         setMeals(res.data); 
       }  catch (error) {
         console.error("שגיאה בטעינת המנות:", error);
@@ -43,7 +58,7 @@ import Jumpdescraption from "../components/jumpdescraption";
 
     useEffect(() => {
       fetchMeals()
-    }, [currentPage]);
+    }, [currentPage, selectedCategory]);
   //סל
   const addToCart = (meal) => {
     setCart(prev => {
@@ -58,11 +73,26 @@ import Jumpdescraption from "../components/jumpdescraption";
     openCart();
     };
 
+
+const filteredMeals = selectedCategory
+? meals.filter((meal) => meal.mealCategory === selectedCategory)
+: meals;
+
 //     const dispatch = useDispatch();
 // const handleDelete = async (id) => {
 //   await deleteMealFromServer(id);
 //   dispatch(deleteMeal(id)); 
 // };
+const handleDelete = async (id) => {
+  try {
+    await deleteMealFromServer(id);
+    setMeals(prev => prev.filter(meal => meal._id !== id));
+  } catch (error) {
+    console.error("שגיאה במחיקה:", error);
+    alert("המחיקה נכשלה");
+  }
+};
+
 
   
   return (
@@ -101,10 +131,10 @@ import Jumpdescraption from "../components/jumpdescraption";
           </> 
           </Box>
         ) : (
-        meals.map((meal, index) => (
-          <ProductItem key={meal._id} meal={meal} addToCart={addToCart} onImageClick={openMealModal}/>
+          filteredMeals.map((meal, index) => (
+          <ProductItem key={meal._id} meal={meal} addToCart={addToCart} onImageClick={openMealModal} onEdit={openModalEdit} onDelete={handleDelete}/>
 
-        ))
+        )) 
         )}
       </div>
       <div className="allpagesButton">
@@ -114,12 +144,8 @@ import Jumpdescraption from "../components/jumpdescraption";
               setCurrentPage(index + 1) }} />
         })}
       </div>
-      <Jumpdescraption
-        open={openModal}
-        onClose={() => setOpenModal(false)}
-        meal={selectedMeal}
-        addToCart={addToCart}
-      />
+      <Jumpdescraption open={openModal} onClose={() => setOpenModal(false)} meal={selectedMeal} addToCart={addToCart} />
+      <EditModal open={openEdit} onClose={() => setOpenEdit(false)} meal={selectedMealEdit} setMeals={setMeals} />
 
     </div>
   

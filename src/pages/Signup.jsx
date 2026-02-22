@@ -4,23 +4,50 @@ import { Paper, Box, TextField, Button } from "@mui/material";
 import "../css/Signup.css";
 import React from "react";
 import { signUpUser } from "../api/userService";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { userIn } from "../features/userSlice";
+
 
 export default function Signup() {
   const { register,handleSubmit,formState: { errors },reset} = useForm();
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  // const onSubmit = async (data) => {
+  //   try {
+  //     const response = await signUpUser(data);
+  //     console.log("הרשמה הצליחה:", response.data);
+  //     alert("הרשמת המשתמש הצליחה!"); // הודעה למשתמש
+  //     reset({ userName:"",userLastName:"",userEmail:"",userPassword:""});
+  //   } catch (error) {
+  //     console.error("אי אפשר להירשם"+" "+error.response?.data?.message);
+  //     alert("שגיאה בהרשמה");
+  //   }
+  // };
+ 
   const onSubmit = async (data) => {
     try {
-      const response = await signUpUser(data);
-      console.log("הרשמה הצליחה:", response.data);
-      alert("הרשמת המשתמש הצליחה!"); // הודעה למשתמש
-      reset({ userName:"",userLastName:"",userEmail:"",userPassword:""});
+      const res = await signUpUser(data);
+  
+      console.log("Signup response data:", res.data);
+  
+      const currentUser = {
+        ...res.data, // ✅ תיקון כאן
+        token: res.data.token
+      };
+  
+      localStorage.setItem("currentUser", JSON.stringify(currentUser));
+  
+      dispatch(userIn(currentUser));
+  
+      navigate("/");
     } catch (error) {
-      console.error("אי אפשר להירשם"+" "+error.response?.data?.message);
-      alert("שגיאה בהרשמה");
+      console.error("שגיאה בהרשמה:", error.response?.data);
+      alert(error.response?.data?.message || "אימייל או סיסמה שגויים");
     }
   };
- 
-
+  
+  
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

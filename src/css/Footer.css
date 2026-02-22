@@ -1,0 +1,42 @@
+/* footer {
+    width: 1520px;
+    height: 250px;
+    background-color: #202020;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    direction: rtl;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .bottom {
+    margin: 0px 70px;
+    text-align: center;
+  }
+  
+  .bottom_title {
+    color: #ffce53;
+  }
+  
+  li {
+    padding: 10px;
+  }
+  
+  li:hover {
+    text-decoration: underline;
+    text-decoration-color: #ffb617;
+  }
+  
+  .footer-logo {
+    height: 70%;
+  }
+  
+  .footer-logo:hover {
+    animation: ronis-scale alternate 1s linear infinite;
+  } */

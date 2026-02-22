@@ -17,11 +17,12 @@
   height: 295px;
   border-radius: 8px; 
   box-shadow: 0 4px 8px rgba(255, 255, 255, 0.068), 0 0px 7px;
-  width: 100%; /* חשוב */
+  width: 250px; /* חשוב */
   object-fit: cover; /* שהתמונה לא תימתח */
+  display: block;
+  cursor: pointer; 
 }
-
-
+ 
 /* 
 .image-wrapper {
   position: relative;
@@ -39,3 +40,25 @@
 .image-wrapper:hover .text { 
   color: rgb(255, 255, 255);
  } */
+ .container {
+  position: relative;
+  width: 50%;
+  max-width: 300px;
+}
+ .overlay {
+  position: absolute; 
+  bottom: 0; 
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.655); /* Black see-through */
+  color: #f1f1f1; 
+  width: 210px;
+  transition: .5s ease;
+  opacity:0;
+  color: white;
+  font-size: 20px;
+  padding: 20px;
+  text-align: center;
+}
+.container:hover .overlay {
+  opacity: 1;
+}

@@ -10,9 +10,21 @@ import Cart from "./pages/Cart";
 import { useEffect, useState } from "react";
 import JumpCart from './components/JumpCart'
 import Jumpdescraption from "./components/jumpdescraption";
+import { useDispatch } from "react-redux";
+import { userIn } from "./features/userSlice";
 
+// import Footer from "./components/footerBar";
 function App() {
-  
+  const dispatch = useDispatch();
+
+useEffect(() => {
+  const savedUser = localStorage.getItem("currentUser");
+
+  if (savedUser) {
+    dispatch(userIn(JSON.parse(savedUser)));
+  }
+}, []);
+
   // סל קניות
   const [cart, setCart] = useState(() => {
     const savedCart = localStorage.getItem('user_shopping_cart');
@@ -28,6 +40,9 @@ function App() {
 
   const openCart = () => {
     setCartOpen(true);
+    setTimeout(() => {
+      setCartOpen(false);
+    }, 2000);
   };
 
   return (
@@ -40,12 +55,11 @@ function App() {
         <Route path="list" element={<ProductsList setCart={setCart} openCart={openCart} />} />
         <Route path="addproduct" element={<Addproduct />} />
         <Route path="/" element={<Home />} />
-        {/* סל קניות */}
-        <Route path="cart" element={<Cart cart={cart} setCart={setCart} />} />
+        <Route path="cart" element={<Cart cart={cart} setCart={setCart} countOfMeals={countOfMeals} />} />
       </Routes>
       <Jumpdescraption />
       <JumpCart cart={cart} setCart={setCart} open={cartOpen} setOpen={setCartOpen}/>
-       
+       {/* <Footer/> */}
     </>
   );
 }

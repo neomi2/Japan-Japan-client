@@ -29,7 +29,7 @@ const Jumpdescraption = ({ open, onClose, meal, addToCart }) => {
       onClose={onClose}
       BackdropProps={{ sx: { backgroundColor: "rgba(0, 0, 0, 0.7)" } }}
     >
-      <Box
+      <Box 
         sx={{
           position: "absolute",
           top: "50%",
@@ -65,7 +65,8 @@ const Jumpdescraption = ({ open, onClose, meal, addToCart }) => {
             <>
               <Typography variant="h6" sx={{ mt: 3 }}>
                 {/* תוספות מומלצות */}
-               עוד באותה קטגוריה:
+                לקוחות אחרים רכשו מוצר זה ביחד עם:
+               {/* עוד באותה קטגוריה: */}
               </Typography>
               <Box sx={{ display: "flex", gap: 2, mt: 1 }}>
                 {addonsImages.map((img, index) => (

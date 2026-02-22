@@ -1,10 +1,18 @@
 import "../css/ProductItem.css";
+import { useSelector } from "react-redux";
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import { Link } from "react-router-dom";
 
-export default function ProductItem({ meal, addToCart ,onImageClick }) {
+export default function ProductItem({ meal, addToCart ,onImageClick, onEdit, onDelete }) {
   // const user = useSelector(state => state.user.currentUser);
   // const isAdmin = user?.role === "ADMIN";
+  const user = useSelector(state => state.user.currentUser);
 
-  return (
+
+
+
+  return ( 
     <div> 
       <ul style={{ listStyle: 'none' }} className="product">
         <li>
@@ -17,14 +25,19 @@ export default function ProductItem({ meal, addToCart ,onImageClick }) {
           <p className="Description">{meal.mealDescription}</p>
           <div className="buttonprice">
             <p className="price">מחיר: {meal.mealprice}₪</p>
-            {/* {isAdmin ? (
+ 
+            {user && user.role === "ADMIN" ? (
         <div className="admin-buttons">
-          <button>✏️ </button>
-          <button>🗑️ </button>
+                <EditIcon sx={{ color: "rgb(240 202 124)", fontSize: 30, margin: "5px 60px 0px 5px" ,cursor:"pointer"}}
+                onClick={() => onEdit(meal)}/>
+<DeleteIcon sx={{ fontSize: 30, cursor: "pointer" , margin: "5px 0px 0px 5px"}} 
+  onClick={() => {
+    if (window.confirm("האם למחוק את המוצר הזה?")) {
+      onDelete(meal._id);}}}/>
         </div> 
-      ) : ( */}
+      ) : ( 
         <button onClick={() => addToCart(meal)} className="add-to-cart" >+</button>
-      {/* )} */}
+      )} 
           </div>
         </li> 
     </ul>

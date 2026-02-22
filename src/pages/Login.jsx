@@ -13,7 +13,7 @@
 //       <input type="text" placeholder="מייל" {...register("Email", {required: true, pattern: /^\S+@\S+$/i})} />
 //       <input type="password"placeholder="סיסמה"{...register("password", {required: true,minLength: 6,maxLength: 12})}/>
 //       <input type="submit" />
-//     </form>
+//     </form> 
 //   );
 // } 
 
@@ -22,19 +22,30 @@ import { Paper, Box, TextField, Button } from "@mui/material";
 import "../css/Login.css";
 import React from "react";
 import { Link } from "react-router-dom";
-
 import { loginUser } from "../api/userService";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { userIn } from "../features/userSlice";
+
 export default function Login() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { register,handleSubmit,formState: { errors },} = useForm();
 
   const onSubmit = async (data) => {
     try {
       const res = await loginUser(data);
       console.log("התחברות הצליחה:", res.data);
+      console.log("Current user login:", res.data.user.userName);
       // שמירת המשתמש המחובר
-      localStorage.setItem("user", JSON.stringify(res.data));
+      const currentUser = {
+        ...res.data.user, // userName, role, _id
+        token: res.data.token
+      };
+      localStorage.setItem("currentUser", JSON.stringify(currentUser));
+      dispatch(userIn(currentUser));
       // מעבר לדף הבית
-      window.location.href = "/";
+      navigate("/");
     } catch (error) {
       alert(error.response?.data?.message || "אימייל או סיסמה שגויים");
     }
@@ -76,7 +87,7 @@ export default function Login() {
   אין לך חשבון?
   <Link to="/signup" style={{ color: "rgb(240 202 124)", marginLeft: "5px" }}>
     הרשמה
-  </Link>
+  </Link> 
 </div>
 
 

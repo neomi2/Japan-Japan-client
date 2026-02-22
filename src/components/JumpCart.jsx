@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import "../css/JumpCart.css";
 import { brown } from "@mui/material/colors";
+import { Link } from "react-router-dom";
 
 const JumpCart = ({ cart, setCart, open, setOpen }) => {
 
@@ -123,11 +124,13 @@ const JumpCart = ({ cart, setCart, open, setOpen }) => {
 
 
               <h3 style={{ marginTop: 20 }}>סה״כ: {totalPrice} ₪</h3>
+              <Link to="cart">
 
-              <button onClick={handleCheckOut}
+              <button
                 style={{color:'white', width: "100%",padding: 15,background: "#f0ca7c",border: "none",fontSize: 18,cursor: "pointer",marginTop: 10,}}>
                 לעבור לסל הקניות
-              </button>
+                  </button>
+                  </Link>
             </>
           )}
         </Box>
