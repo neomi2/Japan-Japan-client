@@ -1,8 +1,8 @@
 .cart-container {
-  margin-top: 130px;
+  margin-top: 100px;
   margin-right: 200px;
   /* margin-left: 500px; */
-  margin-bottom: 50px; 
+  margin-bottom: 45px; 
   direction: rtl;
   padding: 20px;
   width: 500px;
@@ -19,12 +19,13 @@ flex-direction: row;
 .left{
 color: rgb(255, 255, 255);
 background-color: rgb(0, 0, 0);
-margin: 130px 830px 0px 0px;
 width: 500px;
-height: 490px;
+height: 550px;
 border: 1px solid white;
 border-radius: 8px;
 position: fixed;
+top: 100px; 
+right: 850px; 
 }
 /* .header{
   margin: 100px 650px 0px 0px;
